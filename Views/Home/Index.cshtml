@@ -2,47 +2,60 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>*@
+
 <div class="container">
-    <div class="row row-cols-3">
-        <div class="col">
-            <div id="card" class="card" style="width: 18rem;">
-                
-               
-            </div>
-        </div>
+    <div class="row" id="spotContent" >
+        
     </div>
 </div>
+
+                
+               
   
 <script src="~/datas/Travel.js"></script>
 <script>
     //console.log(spots.CommonFormat.Section)//array(100)
+    //console.log(spots.CommonFormat.Section[0])//object
     //console.log(spots.CommonFormat.Section[0].stitle)//新北投溫泉區
-    //console.log(spots.CommonFormat.Section[0].file.img[0].description)
-    //console.log(spots.CommonFormat.Section[0].file.img[0].text)//圖片網址
-//<img src="${file.img[0].text}" class="card-img-top" alt="">
+    //console.log(spots.CommonFormat.Section[0].address)//臺北市  北投區中山路、光明路沿線
+    //console.log(spots.CommonFormat.Section[0].xbody)//
+    
+    //console.log(spots.CommonFormat.Section[0].file.img)//圖片網址
     
 
-    const datas = spots.CommonFormat.Section[0].map(theSpots=> {
-        const { stitle, xbody, address} = theSpots;
-        console.log(stitle)
-        //return (
+    const datas = spots.CommonFormat.Section.map(theSpot => {
 
-        //        `              
-        //            <div class="card-body">
-        //                <h5 class="card-title">${stitle}</h5>
-        //                <p class="card-text">${xbody}</p>
-        //            </div>
-        //            <ul class="list-group list-group-flush">
-        //                <li class="list-group-item">地址 ${address}</li>
-                       
-        //            </ul>
-        //        `    
-        //        )
+        const { stitle, address, xbody, info, file} = theSpot;
+            //console.log(file.img)
+            //console.log(file.img.length)
+            //console.log(file.img[0].text)
+
+            let picText="";
+            if (file.img.length>=2)
+            picText = file.img[0].text;
+            else
+            picText = file.img.text;
+
+        return(
+            `<div class="col-sm-6 col-lg-4 mb-4">
+                    <div class="card">
+                        <img src="${picText}" class="card-img-top">
+                        <div class="card-body">
+                        <h5 class="card-title">${stitle}</h5>
+                         <p class="card-text overflow-auto" style="height:600px">${xbody}</p>
+                    </div>
+                    <div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">${address}</li>
+                            <li class="list-group-item">${info}</li>
+                        </ul>
+                    </div>
+               </div>
+            </div>
+              `
+          )
         })
-        //document.querySelector('#card').innerHTML=datas.join("")
+        //console.log(datas)
+    document.querySelector('#spotContent').innerHTML=datas.join("");
 </script>
 
