@@ -9,24 +9,40 @@
 <div class="container">
     <div class="row row-cols-3">
         <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                </ul>
+            <div id="card" class="card" style="width: 18rem;">
+                
                
             </div>
         </div>
     </div>
 </div>
   
-<script src="~/datas/Travel.js">
+<script src="~/datas/Travel.js"></script>
+<script>
+    //console.log(spots.CommonFormat.Section)//array(100)
+    //console.log(spots.CommonFormat.Section[0].stitle)//新北投溫泉區
+    //console.log(spots.CommonFormat.Section[0].file.img[0].description)
+    //console.log(spots.CommonFormat.Section[0].file.img[0].text)//圖片網址
+//<img src="${file.img[0].text}" class="card-img-top" alt="">
     
+
+    const datas = spots.CommonFormat.Section[0].map(theSpots=> {
+        const { stitle, xbody, address} = theSpots;
+        console.log(stitle)
+        //return (
+
+        //        `              
+        //            <div class="card-body">
+        //                <h5 class="card-title">${stitle}</h5>
+        //                <p class="card-text">${xbody}</p>
+        //            </div>
+        //            <ul class="list-group list-group-flush">
+        //                <li class="list-group-item">地址 ${address}</li>
+                       
+        //            </ul>
+        //        `    
+        //        )
+        })
+        //document.querySelector('#card').innerHTML=datas.join("")
 </script>
 
