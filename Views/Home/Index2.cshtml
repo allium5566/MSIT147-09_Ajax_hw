@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Index2";
+}
+
+<h1>Index2</h1>
+<div class="container">
+    <div class="row" id="spotContent">
+        <div class="col-sm-6 col-lg-4 mb-4" id="column">
+            
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/datas/Travel.js"></script>
+
+    <script>
+        const data=spots.CommonFormat.Section.map(theSpot=>{
+            const { stitle, address, xbody, info, file } = theSpot;
+
+        let picText = "";
+        if (file.img.length >= 2)
+            picText = file.img[0].text;
+        else
+            picText = file.img.text;
+        let xbodycontent = xbody.substring(0, 100)
+            $("#spotContent").children().after(
+                ` <div class="col-sm-6 col-lg-4 mb-4" id="column">
+                    <div class="card" id="card">
+                        <img src="${picText}" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">${stitle}</h5>
+                            <p class="card-text overflow-auto">${xbodycontent}</p>
+                        </div>
+                        <div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">${address}</li>
+                                <li class="list-group-item">${info}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+             `)
+        })
+        
+
+    </script>
+}

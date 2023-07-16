@@ -10,8 +10,9 @@
 </div>
 
                 
-               
-  
+
+@section Scripts{
+
 <script src="~/datas/Travel.js"></script>
 <script>
     //console.log(spots.CommonFormat.Section)//array(100)
@@ -35,14 +36,14 @@
             picText = file.img[0].text;
             else
             picText = file.img.text;
-
+            let xbodycontent = xbody.substring(0,100)
         return(
             `<div class="col-sm-6 col-lg-4 mb-4">
                     <div class="card">
                         <img src="${picText}" class="card-img-top">
                         <div class="card-body">
                         <h5 class="card-title">${stitle}</h5>
-                         <p class="card-text overflow-auto" style="height:600px">${xbody}</p>
+                             <p class="card-text overflow-auto">${xbodycontent}</p>
                     </div>
                     <div>
                         <ul class="list-group list-group-flush">
@@ -58,4 +59,5 @@
         //console.log(datas)
     document.querySelector('#spotContent').innerHTML=datas.join("");
 </script>
+}               
 

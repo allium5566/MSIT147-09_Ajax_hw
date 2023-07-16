@@ -17,7 +17,10 @@ namespace MSIT147_09_Ajax_hw.Controllers
         {
             return View();
         }
-
+        public IActionResult Index2()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
