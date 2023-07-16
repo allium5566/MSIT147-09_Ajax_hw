@@ -6,9 +6,7 @@
 <h1>Index2</h1>
 <div class="container">
     <div class="row" id="spotContent">
-        <div class="col-sm-6 col-lg-4 mb-4" id="column">
-            
-        </div>
+        
     </div>
 </div>
 
@@ -27,7 +25,7 @@
         else
             picText = file.img.text;
         let xbodycontent = xbody.substring(0, 100)
-            $("#spotContent").children().after(
+            $("#spotContent").append(
                 ` <div class="col-sm-6 col-lg-4 mb-4" id="column">
                     <div class="card" id="card">
                         <img src="${picText}" class="card-img-top">
@@ -43,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-             `)
+             `).end()
         })
         
 
