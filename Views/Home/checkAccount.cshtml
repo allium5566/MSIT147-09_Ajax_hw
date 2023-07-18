@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "checkAccount";
+}
+
+<h1></h1>
+
+<h1>checkAccount</h1>
+
+<form method="get">
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <input type="text" class="form-control w-25" id="Name">
+        <div id="NameNotExistAlart" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" class="form-control w-25" id="exampleInputEmail1">
+    </div>
+    <div class="mb-3">
+        <label for="Age" class="form-label">Age</label>
+        <input type="text" class="form-control w-25" id="Age">
+
+    </div>
+    <div class="mb-3">
+        <label for="Photo" class="form-label">Photo</label>
+        <input type="file" class="form-control w-25" id="Photo">
+
+    </div>
+
+
+    <button id="btn1" type="submit" class="btn btn-primary">Register</button>
+</form>
+
+@section Scripts{
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+
+        $("#Name").blur(()=>{
+        let inputName = $("#Name").val();
+        
+            $.get('@Url.Content("~/api/checkAccount")',{"name":`${inputName}`},function(data){
+                //console.log(data)
+                //console.log(typeof(data))
+                if(data)
+                    document.querySelector("#NameNotExistAlart").innerHTML=`<p>此帳號已被註冊</p>`;
+
+                if(!data)
+                    document.querySelector("#NameNotExistAlart").innerHTML =`<p>此帳號未被註冊</p>`;
+                if (!inputName)
+                    document.querySelector("#NameNotExistAlart").innerHTML = `<p>請輸入帳號</p>`;
+            })
+
+          
+        })
+        $("#Name").focus(()=>{
+            $("#NameNotExistAlart").text("");
+        })
+           
+            
+    </script>
+    }
+
+}
+@section Styles{
+
+}
