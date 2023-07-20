@@ -29,6 +29,23 @@ namespace MSIT147_09_Ajax_hw.Controllers
         {
             return View();
         }
+        public IActionResult loadAddress()
+        {
+            return View();
+        }
+      
+        public IActionResult preview()
+        {
+            return View();
+        }
+        public IActionResult loadAddressAsync()
+        {
+            return View();
+        }
+        public IActionResult autoComplete()
+        { 
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

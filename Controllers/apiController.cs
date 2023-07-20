@@ -22,5 +22,20 @@ namespace MSIT147_09_Ajax_hw.Controllers
             var NameExist = _context.Members.Where(n => n.Name == Name).Any();
             return Json(NameExist);
         }
+        public IActionResult Cities()
+        {
+            var cities = _context.Address.Select(c => c.City).Distinct();
+            return Json(cities);
+        }
+        public IActionResult Districts(string city)
+        {
+            var districts=_context.Address.Where(d=>d.City == city).Select(d=>d.SiteId).Distinct();
+            return Json(districts);
+        }
+        public IActionResult Roads(string siteId)
+        {
+            var roads = _context.Address.Where(r => r.SiteId == siteId).Select(r=>r.Road);
+            return Json(roads);
+        }
     }
 }

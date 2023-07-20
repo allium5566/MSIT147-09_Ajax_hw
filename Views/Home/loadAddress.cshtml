@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "loadAddress";
+}
+
+<h1>loadAddress</h1>
+
+<select id="selCities"></select>
+<select id="selDistricts"></select>
+<select id="selRoads"> </select>
+
+@section Scripts{
+    <script>
+        var selCities = document.querySelector("#selCities")
+        var selDistricts = document.querySelector("#selDistricts")
+        var selRoads = document.querySelector("#selRoads")
+
+        function LoadCity(){
+            const xhr=new XMLHttpRequest();
+            xhr.open("GET",'@Url.Content("~/api/cities")');
+            xhr.send();
+            
+            xhr.addEventListener("load",()=>{
+                const data=JSON.parse(xhr.responseText)
+                var cities=data.map(city=>{
+                    return (`<option value="${city}">${city}</option>`)
+                })
+                //console.log(cities)
+               
+
+                selCities.innerHTML = cities.join("");
+                //console.log(cities.join(""));
+                //console.log(selCities.selectedIndex)
+                //console.log(selCities.options[selCities.selectedIndex].value)
+                LoadDistrict();
+            })
+        }
+        function LoadDistrict(){
+            const city = selCities.options[selCities.selectedIndex].value;
+            console.log(city)
+            const xhr=new XMLHttpRequest();
+
+
+            //xhr.open('GET', `/api/Districts?city=${city}`)
+            xhr.open('GET',`@Url.Content("~/api/districts?city=")${city}`)
+            xhr.send()
+            xhr.addEventListener('load',()=>{
+                const data=JSON.parse(xhr.responseText)
+                var districts=data.map(district=>{
+                    return (`<option value="${district}">${district}</option>`)
+                })
+                selDistricts.innerHTML = districts.join("")
+                LoadRoad();
+            })
+        }
+        function LoadRoad(){
+            const district = selDistricts.options[selDistricts.selectedIndex].value;
+            console.log(district)
+            const xhr=new XMLHttpRequest();
+            //xhr.open('GET', `/api/Roads?siteId=${district}`)
+            xhr.open('GET', `@Url.Content("~/api/roads?SiteId=")${district}`)
+            xhr.send();
+            xhr.addEventListener('load', () => {
+                const data = JSON.parse(xhr.responseText)
+                var roads = data.map(road => {
+                    return (`<option value="${road}">${road}</option>`)
+                })
+                selRoads.innerHTML = roads.join("")
+                
+            })
+        }
+        LoadCity();
+
+        selCities.addEventListener('change',()=>{
+            LoadDistrict();
+        })
+        selDistricts.addEventListener('change',()=>{
+            LoadRoad();
+        })
+
+
+    </script>
+}
