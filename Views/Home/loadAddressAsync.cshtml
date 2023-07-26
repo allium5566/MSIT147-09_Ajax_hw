@@ -15,16 +15,37 @@
 
     <script>
         const selCity = document.querySelector("#selCities")
+        const selDistrict = document.querySelector("#selDistricts")
+        const selRoad = document.querySelector("#selRoads")
         async function loadCity() {
             const response = await fetch('@Url.Content("~/api/cities")')
-            const data = await response.text();
+            const data = await response.json()
 
-            var cities = data.map
-
+            var cities = data.map(city=>{
+                return (`<option value="${city}">${city}</option>`)
+            })
+           selCity.innerHTML=cities.join("");
             LoadDistrict();
         }
         async function LoadDistrict() {
 
+            const selcity=selCity.options[selCity.selectedindex].value
+            const response =await fetch(`@Url.Content("~/api/Districts")`)
+            const data=await response.json()
+            var districts=data.map(disctict=>{
+                return (`<option value="${disctict}">${disctict}</option>`)
+            })
+            selDistrict.innerHTML = districts.join("")
+            LoadRoad()
+        }
+        async function LoadRoad(){
+            const selRoads = selCity.options[selCity.selectedindex].value
+            const response = await fetch(`@Url.Content("~/api/Roads")`)
+            const data = await response.json()
+            var roads = data.map(Road => {
+                return (`<option value="${Road}">${Road}</option>`)
+            })
+            selRoad.innerHTML=roads.join("")
         }
         loadCity();
     </script>
